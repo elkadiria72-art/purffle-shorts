@@ -34,4 +34,12 @@ jobs:
           PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
           CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
         run: |
-          python -m purffle_shorts
+          python -m purffle_shorts --help || python -m purffle_shorts.cli || python -m purffle_shorts
+          # 5. رفع الفيديو الناتج إلى GitHub Artifacts ليمكنك تحميله ورؤيته
+      - name: Upload Generated Video
+        uses: actions/upload-artifact@v4
+        with:
+          name: generated-short-video
+          path: |
+            *.mp4
+            output/
