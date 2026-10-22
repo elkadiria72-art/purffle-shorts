@@ -33,14 +33,16 @@ jobs:
           python -m pip install --upgrade pip
           pip install .
 
-      # 5. تشغيل أمر صنع الفيديو المباشر (make)
+      # 5. تشغيل أمر صنع الفيديو المباشر مع تحديد النموذج المحدث
       - name: Generate Shorts Video
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
           CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+          LLM_MODEL: "gemini-3.8-flash"
+          GEMINI_MODEL: "gemini-3.8-flash"
         run: |
-          python -m purffle_shorts make
+          python -m purffle_shorts make --model gemini-3.8-flash || python -m purffle_shorts make
 
       # 6. حفظ الفيديو الناتج في غيت هاب لتستطيع تحميله ومعاينته
       - name: Upload Generated Video Artifact
