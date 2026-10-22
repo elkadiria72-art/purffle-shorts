@@ -44,12 +44,13 @@ jobs:
         run: |
           python -m purffle_shorts make --model gemini-3.8-flash || python -m purffle_shorts make
 
-      # 6. حفظ الفيديو الناتج في غيت هاب لتستطيع تحميله ومعاينته
+     # 6. حفظ الفيديو الناتج في غيت هاب لتستطيع تحميله ومعاينته
       - name: Upload Generated Video Artifact
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: generated-short-video
           path: |
+            output_videos/**/short.mp4
+            output_videos/
             *.mp4
-            output/
